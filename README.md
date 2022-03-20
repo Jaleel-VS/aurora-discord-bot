@@ -12,8 +12,7 @@ As a user I want to conveniently lookup information on the blockchain about a sp
 
 # Video 
 
-
-//
+https://youtu.be/e_wq_YIE_RI
 
 # Screenshots
 

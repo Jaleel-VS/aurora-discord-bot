@@ -8,8 +8,8 @@ const web3_1 = __importDefault(require("web3"));
 const fetch_json_1 = require("fetch-json");
 require("dotenv").config();
 const AUTHOR = "JD, Tebogo";
-const BOT_NAME = "La señorita Aurora";
-const BOT_NAME_FOOTER = "La señorita Aurora";
+const BOT_NAME = "La senyorita Aurora";
+const BOT_NAME_FOOTER = "La senyorita Aurora";
 const EMBED_COLOR_PRIMARY = 0x32a852;
 const EMBED_COLOR_SECONDARY = 0xffffff;
 const IMAGE_DEFAULT = "https://i.imgur.com/RGtv8h0.png";
@@ -28,8 +28,10 @@ client.on("ready", () => {
 });
 client.on("message", async (msg) => {
     try {
-        if (msg.content === "!balance") {
-            const url = 'https://api-testnet.aurorascan.dev/api?module=account&action=balance&address=0x302b9672642c26EF7b5B6c53df592A20EcB0FDe3&tag=latest&apikey= ' + process.env.API_KEY;
+        const args = msg.content.slice("!".length).trim().split(/ +/g);
+        const command = args.shift().toLowerCase();
+        if (command === "balance") {
+            const url = `https://api-testnet.aurorascan.dev/api?module=account&action=balance&address=${args[0]}&tag=latest&apikey= ` + process.env.API_KEY;
             const data = await fetch_json_1.fetchJson.get(url);
             const accountBalance = data.result;
             const msgEmbed = new discord_js_1.MessageEmbed()
@@ -38,7 +40,7 @@ client.on("message", async (msg) => {
                 .setURL(URL_BOT)
                 .setAuthor("Author: " + AUTHOR, IMAGE_DEFAULT, URL_BOT)
                 .setThumbnail(LOGO)
-                .addField("Current account balance", `${accountBalance}` + `${TOKEN_NAME}`)
+                .addField("Current account balance", `${accountBalance}` + ` ${TOKEN_NAME}`)
                 .setImage(LOGO)
                 .setFooter(BOT_NAME_FOOTER, IMAGE_DEFAULT)
                 .setTimestamp();
@@ -46,7 +48,7 @@ client.on("message", async (msg) => {
             client.user.setActivity("tokens", { type: "WATCHING" });
             // client.user.setAvatar(IMAGE_DEFAULT)
         }
-        if (msg.content === "!totalsupply") {
+        if (command === "totalsupply") {
             const url = 'https://api-testnet.aurorascan.dev/api?module=stats&action=ETHsupply&apikey=' + process.env.API_KEY;
             const data = await fetch_json_1.fetchJson.get(url);
             const totalSupplyAurora = data.result;
@@ -56,7 +58,7 @@ client.on("message", async (msg) => {
                 .setURL(URL_BOT)
                 .setAuthor("Author: " + AUTHOR, IMAGE_DEFAULT, URL_BOT)
                 .setThumbnail(LOGO)
-                .addField("Total Aurora supply", `${totalSupplyAurora}` + `${TOKEN_NAME}`)
+                .addField("Total Aurora supply", `${totalSupplyAurora}` + ` ${TOKEN_NAME}`)
                 .setImage(LOGO)
                 .setFooter(BOT_NAME_FOOTER, IMAGE_DEFAULT)
                 .setTimestamp();
@@ -64,25 +66,19 @@ client.on("message", async (msg) => {
             client.user.setActivity("tokens", { type: "WATCHING" });
             // client.user.setAvatar(IMAGE_DEFAULT)
         }
-        if (msg.content === "!transactions") {
+        if (command === "transactions") {
             // 
             const url = 'https://api-testnet.aurorascan.dev/api?module=account&action=txlist&address=0x0000000000000000000000000000000000001004&startblock=1&endblock=99999999&sort=asc&apikey=' + process.env.API_KEY;
             const data = await fetch_json_1.fetchJson.get(url);
             let message = "No transactions found.";
             console.log(data.message);
-            // if (data.result === []) {
-            //   message = "No transactions found."
-            // }
-            // else {
-            //   message = data.result
-            // }
             const msgEmbed = new discord_js_1.MessageEmbed()
                 .setColor(EMBED_COLOR_PRIMARY)
                 .setDescription(BOT_NAME)
                 .setURL(URL_BOT)
                 .setAuthor("Author: " + AUTHOR, IMAGE_DEFAULT, URL_BOT)
                 .setThumbnail(LOGO)
-                .addField("Total Aurora supply", `${message}`)
+                .addField("Total Aurora supply", ` ${message}`)
                 .setImage(LOGO)
                 .setFooter(BOT_NAME_FOOTER, IMAGE_DEFAULT)
                 .setTimestamp();

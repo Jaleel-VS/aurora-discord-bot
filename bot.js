@@ -30,6 +30,7 @@ client.on("message", async (msg) => {
     try {
         const args = msg.content.slice("!".length).trim().split(/ +/g);
         const command = args.shift().toLowerCase();
+        // test_address = 0x302b9672642c26EF7b5B6c53df592A20EcB0FDe3
         if (command === "balance") {
             const url = `https://api-testnet.aurorascan.dev/api?module=account&action=balance&address=${args[0]}&tag=latest&apikey= ` + process.env.API_KEY;
             const data = await fetch_json_1.fetchJson.get(url);
@@ -38,7 +39,7 @@ client.on("message", async (msg) => {
                 .setColor(EMBED_COLOR_PRIMARY)
                 .setDescription(BOT_NAME)
                 .setURL(URL_BOT)
-                .setAuthor("Author: " + AUTHOR, IMAGE_DEFAULT, URL_BOT)
+                .setAuthor("Authors: " + AUTHOR, IMAGE_DEFAULT, URL_BOT)
                 .setThumbnail(LOGO)
                 .addField("Current account balance", `${accountBalance}` + ` ${TOKEN_NAME}`)
                 .setImage(LOGO)
@@ -56,9 +57,9 @@ client.on("message", async (msg) => {
                 .setColor(EMBED_COLOR_PRIMARY)
                 .setDescription(BOT_NAME)
                 .setURL(URL_BOT)
-                .setAuthor("Author: " + AUTHOR, IMAGE_DEFAULT, URL_BOT)
+                .setAuthor("Authors: " + AUTHOR, IMAGE_DEFAULT, URL_BOT)
                 .setThumbnail(LOGO)
-                .addField("Total Aurora supply", `${totalSupplyAurora}` + ` ${TOKEN_NAME}`)
+                .addField("Total Aurora supply: ", `${totalSupplyAurora}` + ` ${TOKEN_NAME}`)
                 .setImage(LOGO)
                 .setFooter(BOT_NAME_FOOTER, IMAGE_DEFAULT)
                 .setTimestamp();
@@ -78,7 +79,7 @@ client.on("message", async (msg) => {
                 .setURL(URL_BOT)
                 .setAuthor("Author: " + AUTHOR, IMAGE_DEFAULT, URL_BOT)
                 .setThumbnail(LOGO)
-                .addField("Total Aurora supply", ` ${message}`)
+                .addField("Transactions: ", ` ${message}`)
                 .setImage(LOGO)
                 .setFooter(BOT_NAME_FOOTER, IMAGE_DEFAULT)
                 .setTimestamp();

@@ -60,7 +60,7 @@ client.on("message", async (msg) => {
         .setColor(EMBED_COLOR_PRIMARY)
         .setDescription(BOT_NAME)
         .setURL(URL_BOT)
-        .setAuthor("Author: " + AUTHOR, IMAGE_DEFAULT, URL_BOT)
+        .setAuthor("Authors: " + AUTHOR, IMAGE_DEFAULT, URL_BOT)
         .setThumbnail(LOGO)
         .addField("Total Aurora supply: ", `${totalSupplyAurora}` + ` ${TOKEN_NAME}`)
         .setImage(LOGO)
